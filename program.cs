@@ -4,6 +4,7 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 
+
 class RoverApp : Form
 {
     PictureBox roverBox;
@@ -70,6 +71,8 @@ class RoverApp : Form
         surpriseTimer.Interval = rand.Next(20000, 40000);
     }
 
+
+
     private void RoverBox_MouseDown(object sender, MouseEventArgs e)
     {
         if (e.Button == MouseButtons.Left)
@@ -94,6 +97,8 @@ class RoverApp : Form
         isMouseDown = false;
     }
 
+
+
     private ContextMenuStrip BuildContextMenu()
     {
         var menu = new ContextMenuStrip();
@@ -102,6 +107,8 @@ class RoverApp : Form
         menu.Items.Add("Exit", null, delegate { Application.Exit(); });
         return menu;
     }
+
+
 
     private Image LoadGifFromResources(string resourceName)
     {
@@ -113,6 +120,8 @@ class RoverApp : Form
             return Image.FromStream(stream);
         }
     }
+
+
 
     private void PlayRandomIdle()
     {
@@ -127,7 +136,8 @@ class RoverApp : Form
 
         var t = new Timer();
         t.Interval = 3000;
-        t.Tick += delegate {
+        t.Tick += delegate
+        {
             t.Stop();
             PlayRandomIdle();
         };
@@ -139,12 +149,16 @@ class RoverApp : Form
         roverBox.Image = LoadGifFromResources(gif);
         var t = new Timer();
         t.Interval = 3000;
-        t.Tick += delegate {
+        t.Tick += delegate
+        {
             t.Stop();
             PlayRandomIdle();
         };
         t.Start();
     }
+
+
+
 
     [STAThread]
     static void Main()
