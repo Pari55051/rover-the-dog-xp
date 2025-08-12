@@ -104,8 +104,34 @@ class RoverApp : Form
         var menu = new ContextMenuStrip();
         menu.Items.Add("Play Football", null, delegate { PlayAction("rover-football.gif"); });
         menu.Items.Add("Read Newspaper", null, delegate { PlayAction("newspaper.gif"); });
+        menu.Items.Add("Dig a Hole", null, delegate { PlayDigAction(); });
+        menu.Items.Add("Cook as Masterchef", null, delegate { PlayAction("masterchef.gif"); });
+        menu.Items.Add("Pose as a Movie Star", null, delegate { PlayAction("moviestar.gif"); });
+        menu.Items.Add("Lick the Screen", null, delegate { PlayAction("licks-screen.gif"); });
+        menu.Items.Add("Scratch", null, delegate { PlayAction("scratching-sad.gif"); });
         menu.Items.Add("Exit", null, delegate { Application.Exit(); });
         return menu;
+    }
+
+    // digging with two gifs
+    private void PlayDigAction()
+    {
+        roverBox.Image = LoadGifFromResources("digging.gif");
+        var t = new Timer();
+        t.Interval = 2000;
+        t.Tick += delegate {
+            t.Stop();
+            roverBox.Image = LoadGifFromResources("digging-success.gif");
+
+            var t2 = new Timer();
+            t2.Interval = 2000;
+            t2.Tick += delegate {
+                t2.Stop();
+                PlayRandomIdle();
+            };
+            t2.Start();
+        };
+        t.Start();
     }
 
 
